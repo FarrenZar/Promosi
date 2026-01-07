@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<!--
+  WEBSITE PROMOSI GAME
+  Tema: Dark | Profesional | UI/UX Rapi
+  Single-file HTML + CSS + JS
+  Jumlah baris: >1000 (dibuat panjang dengan struktur modular, komentar, dan konten lengkap)
+-->
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ElNova — Game Promotion Hub</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- =========================
+       FONT & ICON
+  ========================== -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- =========================
+       GLOBAL STYLE
+  ========================== -->
+    <style>
+        :root {
+            --bg-main: #0b0f1a;
+            --bg-secondary: #12182b;
+            --bg-card: #151c34;
+            --accent: #6c8cff;
+            --accent-soft: #3f5efb;
+            --text-main: #e6e9f0;
+            --text-muted: #9aa4c7;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f1c40f;
+            --border-soft: rgba(255, 255, 255, 0.08);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #0b0f1a 0%, #070a14 100%);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* =========================
+       UTILITY CLASSES
+    ========================== */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 60px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(63, 94, 251, 0.35);
+            transition: 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(63, 94, 251, 0.45);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-soft);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            transition: 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* =========================
+       VISUAL ENHANCEMENTS & INTERACTIONS
+    ========================== */
+        .btn-primary,
+        .btn-outline {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 20px 60px rgba(63, 94, 251, 0.45);
+        }
+
+        .btn-outline:hover {
+            transform: translateY(-2px);
+            border-color: rgba(108, 140, 255, 0.28);
+            color: var(--accent);
+        }
+
+        .game-card {
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s;
+        }
+
+        .game-thumb {
+            transition: transform 0.45s ease, background 0.35s, box-shadow 0.35s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            border-color: rgba(108, 140, 255, 0.12);
+        }
+
+        .game-card:hover .game-thumb {
+            transform: scale(1.04);
+            box-shadow: 0 24px 60px rgba(16, 20, 40, 0.6);
+        }
+
+        .game-meta span:first-child {
+            background: rgba(108, 140, 255, 0.10);
+            color: var(--accent);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        .game-meta span:last-child {
+            opacity: 0.85;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+            border-color: rgba(108, 140, 255, 0.06);
+        }
+
+        .hero h1 {
+            transition: transform 0.6s ease, letter-spacing 0.3s ease;
+        }
+
+        .hero:hover .hero h1 {
+            transform: translateY(-6px);
+            letter-spacing: 0.6px;
+        }
+
+        a:focus,
+        button:focus,
+        .nav-links a:focus {
+            outline: 3px solid rgba(108, 140, 255, 0.12);
+            outline-offset: 3px;
+            border-radius: 8px;
+        }
+
+        /* Hero stat boxes */
+        .hero-stats {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(108, 140, 255, 0.04);
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .stat-box strong {
+            color: var(--accent);
+            margin-left: 4px;
+        }
+
+        /* =========================
+       HEADER & NAVIGATION
+    ========================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(11, 15, 26, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 0;
+            color: var(--text-main);
+            font-size: 22px;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        /* Header action buttons (search + submit) */
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .search-btn:hover {
+            background: rgba(108, 140, 255, 0.08);
+            transform: translateY(-2px);
+            color: var(--accent);
+        }
+
+        .submit-btn {
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 8px 28px rgba(63, 94, 251, 0.18);
+        }
+
+        @media (max-width: 756px) {
+            .header-actions {
+                display: none;
+            }
+        }
+
+        /* =========================
+       HERO SECTION
+    ========================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            background:
+                radial-gradient(circle at top right, rgba(108, 140, 255, 0.15), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(63, 94, 251, 0.12), transparent 40%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 54px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 600px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-card {
+            background: linear-gradient(180deg, #151c34, #0f1528);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-soft);
+        }
+
+        /* Rich hero-card content */
+        .hero-preview {
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+
+        .hero-preview img {
+            display: block;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .hero-card .card-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .hero-card .card-desc {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            margin-bottom: 12px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-muted);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .release {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .card-actions .btn-outline {
+            padding: 8px 12px;
+            border-radius: 10px;
+        }
+
+        .card-actions .btn-primary {
+            padding: 8px 12px;
+            border-radius: 10px;
+        }
+
+        .progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress>span {
+            display: block;
+            height: 100%;
+            width: 45%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+        }
+
+        /* Hover overlay for game thumbnails */
+        .game-thumb {
+            position: relative;
+        }
+
+        .game-thumb::after {
+            content: 'Details';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: transparent;
+            font-weight: 800;
+            font-size: 16px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.45));
+            transition: opacity 0.28s ease, color 0.18s ease, transform 0.28s ease;
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        .game-card:hover .game-thumb::after {
+            opacity: 1;
+            color: #fff;
+            transform: translateY(0);
+        }
+
+        /* Hero preview hover */
+        .hero-preview {
+            transition: transform 0.45s ease, box-shadow 0.35s ease;
+        }
+
+        .hero-card:hover .hero-preview {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+        }
+
+        /* =========================
+       GAME GRID
+    ========================== */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+            transition: 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .game-thumb {
+            height: 160px;
+            background: linear-gradient(135deg, #2b2f55, #1a1f3d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .game-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .game-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* =========================
+       FEATURE SECTION
+    ========================== */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 36px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-soft);
+            transition: 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* =========================
+           MOBILE / TABLET (<=756px)
+        ========================== */
+        @media (max-width: 756px) {
+
+            html,
+            body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            /* Header */
+            .navbar {
+                height: 64px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .header-actions {
+                display: none;
+            }
+
+            /* mobile menu when opened */
+            .nav-links.open {
+                display: flex !important;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(180deg, rgba(11, 15, 26, 0.98), rgba(7, 9, 14, 0.98));
+                flex-direction: column;
+                gap: 12px;
+                padding: 14px 18px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+                z-index: 1100;
+            }
+
+            .nav-links.open a {
+                padding: 10px 6px;
+                font-size: 16px;
+                color: var(--text-main);
+            }
+
+            /* Hero adjustments */
+            .hero {
+                padding-top: 80px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .hero-preview img {
+                height: 140px;
+            }
+
+            /* Game grid stacks to single column */
+            .game-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .container {
+                padding: 0 14px;
+            }
+
+            footer {
+                padding: 40px 0 24px;
+            }
+
+            /* Ensure long text wraps */
+            .game-title,
+            .game-desc {
+                word-break: break-word;
+            }
+        }
+
+        /* =========================
+       FOOTER
+    ========================== */
+        footer {
+            background: #070a14;
+            border-top: 1px solid var(--border-soft);
+            padding: 80px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 16px;
+        }
+
+        .footer-col a {
+            display: block;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-soft);
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+       HEADER
+  ========================== -->
+    <header>
+        <div class="container navbar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <div class="logo">ElNova</div>
+                <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+            </div>
+            <nav class="nav-links" id="mainNav">
+                <a href="#home">Home</a>
+                <a href="#games">Games</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header-actions" aria-hidden="false">
+                <button class="search-btn" aria-label="Search">🔎</button>
+                <a href="#contact" class="submit-btn">Submit Game</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- =========================
+       HERO
+  ========================== -->
+    <section class="hero" id="home">
+        <div class="container hero-grid">
+            <div>
+                <h1>Discover The Next Generation<br>Of Epic Games</h1>
+                <p>Platform promosi game modern untuk rilis terbaru, ekspansi cerita, dan dunia baru yang akan segera
+                    hadir. Semua dikurasi dengan kualitas tinggi.</p>
+                <div class="hero-actions">
+                    <a href="#games" class="btn-primary">Explore Games</a>
+                    <a href="#features" class="btn-outline">Why ElNova?</a>
+                </div>
+                <div class="hero-stats" style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+                    <div class="stat-box">🎮 <strong>20+</strong> Games</div>
+                    <div class="stat-box">🚀 <strong>5</strong> Upcoming</div>
+                    <div class="stat-box">✨ <strong>Featured</strong> Release</div>
+                </div>
+            </div>
+            <div class="hero-card" aria-labelledby="featured-release">
+                <div class="hero-preview">
+                    <img loading="lazy"
+                        src="https://images.unsplash.com/photo-1604079628040-94301bb21b91?auto=format&fit=crop&w=1200&q=60"
+                        alt="Eclipse Realm Preview">
+                </div>
+                <div id="featured-release" class="card-title">Eclipse Realm: Awakening</div>
+                <div class="card-desc">A deep dark-fantasy RPG expansion that expands the world, characters, and
+                    branching consequences. Expect new regions, enemies, and narrative arcs.</div>
+                <div class="badges">
+                    <div class="badge">RPG</div>
+                    <div class="badge">PC • Console</div>
+                    <div class="badge">Single Player</div>
+                </div>
+                <div class="release">Release: Q3 2026 • Early Access planned</div>
+                <div class="card-actions">
+                    <a href="#trailer" class="btn-primary">Watch Trailer</a>
+                    <a href="#contact" class="btn-outline">Wishlist / Request Access</a>
+                </div>
+                <div class="progress" aria-hidden="true"><span style="width:48%"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+       GAME SECTION
+  ========================== -->
+    <section class="section" id="games">
+        <div class="container">
+            <h2 class="section-title">Upcoming & Featured Games</h2>
+            <p class="section-subtitle">Lebih dari 20 game yang akan rilis atau memperkenalkan cerita baru, dari
+                berbagai genre dan platform.</p>
+
+            <div class="game-grid">
+                <!-- 20+ GAME CARDS -->
+                <!-- Game 1 -->
+                <div class="game-card">
+                    <div class="game-thumb">Game 01</div>
+                    <div class="game-content">
+                        <div class="game-title">Eclipse Realm</div>
+                        <div class="game-desc">Dark fantasy RPG dengan dunia luas dan cerita bercabang.</div>
+                        <div class="game-meta"><span>RPG</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 02</div>
+                    <div class="game-content">
+                        <div class="game-title">Neon Drift</div>
+                        <div class="game-desc">Arcade racing futuristik dengan visual neon cyberpunk.</div>
+                        <div class="game-meta"><span>Racing</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 03</div>
+                    <div class="game-content">
+                        <div class="game-title">Iron Dominion</div>
+                        <div class="game-desc">Strategi perang skala besar dengan diplomasi mendalam.</div>
+                        <div class="game-meta"><span>Strategy</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 04</div>
+                    <div class="game-content">
+                        <div class="game-title">Void Protocol</div>
+                        <div class="game-desc">FPS sci-fi dengan misi taktis dan cerita sinematik.</div>
+                        <div class="game-meta"><span>FPS</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 05</div>
+                    <div class="game-content">
+                        <div class="game-title">Myth of Arkania</div>
+                        <div class="game-desc">Petualangan open-world berbasis mitologi kuno.</div>
+                        <div class="game-meta"><span>Adventure</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 06</div>
+                    <div class="game-content">
+                        <div class="game-title">Starfall Odyssey</div>
+                        <div class="game-desc">Eksplorasi galaksi dengan narasi berbasis pilihan.</div>
+                        <div class="game-meta"><span>Sci-Fi</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 07</div>
+                    <div class="game-content">
+                        <div class="game-title">Shadow Circuit</div>
+                        <div class="game-desc">Stealth-action di kota futuristik penuh intrik.</div>
+                        <div class="game-meta"><span>Action</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 08</div>
+                    <div class="game-content">
+                        <div class="game-title">Crimson Tactics</div>
+                        <div class="game-desc">Tactical RPG berbasis turn dengan karakter kompleks.</div>
+                        <div class="game-meta"><span>Tactics</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 09</div>
+                    <div class="game-content">
+                        <div class="game-title">Frostbound</div>
+                        <div class="game-desc">Survival di dunia es dengan manajemen sumber daya.</div>
+                        <div class="game-meta"><span>Survival</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 10</div>
+                    <div class="game-content">
+                        <div class="game-title">Astral Legacy</div>
+                        <div class="game-desc">JRPG modern dengan gaya visual anime gelap.</div>
+                        <div class="game-meta"><span>JRPG</span><span>2026</span></div>
+                    </div>
+                </div>
+                <!-- Tambahan game untuk memenuhi >20 -->
+                <div class="game-card">
+                    <div class="game-thumb">Game 11</div>
+                    <div class="game-content">
+                        <div class="game-title">Titanfall Reborn</div>
+                        <div class="game-desc">Mecha combat generasi baru dengan mode cerita.</div>
+                        <div class="game-meta"><span>Action</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 12</div>
+                    <div class="game-content">
+                        <div class="game-title">Phantom Notes</div>
+                        <div class="game-desc">Rhythm game dengan narasi misterius.</div>
+                        <div class="game-meta"><span>Music</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 13</div>
+                    <div class="game-content">
+                        <div class="game-title">Nova City Online</div>
+                        <div class="game-desc">MMO sosial di kota futuristik.</div>
+                        <div class="game-meta"><span>MMO</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 14</div>
+                    <div class="game-content">
+                        <div class="game-title">Warden of Time</div>
+                        <div class="game-desc">Puzzle time-manipulation dengan cerita mendalam.</div>
+                        <div class="game-meta"><span>Puzzle</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 15</div>
+                    <div class="game-content">
+                        <div class="game-title">Blood & Steel</div>
+                        <div class="game-desc">Action medieval dengan sistem combat realistis.</div>
+                        <div class="game-meta"><span>Action</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 16</div>
+                    <div class="game-content">
+                        <div class="game-title">Echoes of Gaia</div>
+                        <div class="game-desc">Exploration game dengan tema alam & teknologi.</div>
+                        <div class="game-meta"><span>Exploration</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 17</div>
+                    <div class="game-content">
+                        <div class="game-title">Cyber Heist</div>
+                        <div class="game-desc">Co-op stealth heist di dunia cyberpunk.</div>
+                        <div class="game-meta"><span>Co-op</span><span>2026</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 18</div>
+                    <div class="game-content">
+                        <div class="game-title">Runes of Valor</div>
+                        <div class="game-desc">Fantasy ARPG dengan sistem rune unik.</div>
+                        <div class="game-meta"><span>ARPG</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 19</div>
+                    <div class="game-content">
+                        <div class="game-title">Skyline Racer</div>
+                        <div class="game-desc">Balapan arcade di kota vertikal futuristik.</div>
+                        <div class="game-meta"><span>Racing</span><span>2025</span></div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumb">Game 20</div>
+                    <div class="game-content">
+                        <div class="game-title">Obsidian Hollow</div>
+                        <div class="game-desc">Horror atmosferik dengan cerita psikologis.</div>
+                        <div class="game-meta"><span>Horror</span><span>2026</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+       FEATURES
+  ========================== -->
+    <section class="section" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Promote on ElNova?</h2>
+            <p class="section-subtitle">Platform promosi game yang dirancang khusus untuk gamer modern dan studio
+                kreatif.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Premium Exposure</h3>
+                    <p>Game Anda ditampilkan dalam tampilan profesional dan eksklusif.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Story Focused</h3>
+                    <p>Menonjolkan lore, world-building, dan narasi game.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Modern UI/UX</h3>
+                    <p>Desain dark modern yang nyaman dan futuristik.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multi Platform</h3>
+                    <p>Dukungan promosi untuk PC, Console, dan Mobile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+       FOOTER
+  ========================== -->
+    <footer id="about">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>ElNova</h4>
+                <p style="color:var(--text-muted)">Hub promosi game generasi baru.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4><a href="#">Games</a><a href="#">Studios</a><a href="#">News</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4><a href="#">FAQ</a><a href="#">Contact</a><a href="#">Privacy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Social</h4><a href="#">Twitter</a><a href="#">Discord</a><a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 ElNova. All rights reserved.</div>
+    </footer>
+
+    <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+    <script>
+        // Simple smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Mobile nav toggle
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var nav = document.getElementById('mainNav');
+            if (!toggle || !nav) return;
+            toggle.addEventListener('click', function () {
+                var open = nav.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            // close menu when clicking a link
+            nav.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () {
+                    if (nav.classList.contains('open')) {
+                        nav.classList.remove('open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <script>
+        // Initialize AOS after assigning attributes
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hero animations
+            var heroGrid = document.querySelector('.hero-grid');
+            if (heroGrid) {
+                heroGrid.setAttribute('data-aos', 'fade-up');
+                heroGrid.setAttribute('data-aos-duration', '900');
+            }
+            var heroCard = document.querySelector('.hero-card');
+            if (heroCard) {
+                heroCard.setAttribute('data-aos', 'zoom-in');
+                heroCard.setAttribute('data-aos-duration', '800');
+            }
+
+            // Feature cards
+            document.querySelectorAll('.feature-card').forEach(function (el, i) {
+                el.setAttribute('data-aos', 'fade-up');
+                el.setAttribute('data-aos-duration', '600');
+                el.setAttribute('data-aos-delay', String(i * 80));
+            });
+
+            // Game cards with slight stagger
+            document.querySelectorAll('.game-card').forEach(function (el, i) {
+                el.setAttribute('data-aos', 'fade-up');
+                el.setAttribute('data-aos-duration', '600');
+                el.setAttribute('data-aos-delay', String((i % 6) * 60));
+            });
+
+            // init AOS with sensible defaults
+            if (window.AOS) {
+                AOS.init({ once: true, duration: 500, offset: 120, easing: 'ease-out-cubic' });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
